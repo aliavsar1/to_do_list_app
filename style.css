@@ -1,5 +1,11 @@
 .aimItem {
   border: 1px gray solid;
-  width: auto;
+  width: 600px;
+  margin: 5px 0px;
+  /* display: inline-block; */
+}
+.removeItem {
+  border: 1px solid black;
+  width: 100px;
   margin: 5px 0px;
 }

@@ -1,10 +1,18 @@
 "use strict";
 
 // Variable assignments
-const myBtn = document.getElementById("myBtn");
-const pElement = document.getElementById("demo");
-const pElement2 = document.getElementById("demo2");
+const addButton = document.getElementById("addBtn");
+const displayListButton = document.getElementById("displayListBtn");
+const clearAllButton = document.getElementById("clearAllBtn");
+const displaGreeting = document.getElementById("displayGreeting");
+const displayMessage = document.getElementById("displayMessage");
+const displayItems = document.getElementById("displayItems");
+
+const aimItem = document.getElementById("aim");
+let toDoListArray = [];
 let i = 0;
+const listItems = JSON.parse(localStorage.getItem("toDoListArray"));
+
 //Date function
 function dateFunction(newDate) {
   const dateObj = new Date();
@@ -36,52 +44,31 @@ function dateFunction(newDate) {
   return (newDate = `${"Bugün " + day + " " + month + " " + daysOfTheWeek}`);
 }
 
-//check whether localstorage is being used and the number of to-do-list items
-
-if (localStorage.getItem(1) === null) {
-  pElement.innerHTML = "Listeniz boş. Yeni yapılacak iş ekleyin.";
-}
-
-//SHow the existing to do list
-showListBtn.addEventListener("click", function () {
-  pElement2.innerHTML = `Esenlikler. ${dateFunction()}. Yapılacak ${
-    localStorage.length
-  } adet işiniz var.`;
-  //LOCAL STORAGE
-  for (i = 1; i <= 5; i++) {
-    if (localStorage.getItem(i) !== null) {
-      let itemOfAim = localStorage.getItem(i);
-
-      let html = `<div class="aimItem">${i}. ${itemOfAim}</div>`;
-      pElement.insertAdjacentHTML("beforeend", html);
-    }
-  }
-});
-
-//ADD AN ITEM TO THE LIST
-
-myBtn.addEventListener("click", function () {
-  i = localStorage.length;
-  i = i + 1;
-  if (i > 5) {
-    alert("5'ten fazla günlük iş maddesi girilemez.");
-
+//add items to the list
+addButton.addEventListener("click", function () {
+  if (i > 4) {
+    displayMessage.innerHTML = "5'ten fazla görev ekleyemezsiniz!";
     return;
   }
-
-  function adder() {
-    const aimItem = document.getElementById("aim").value;
-    localStorage.setItem(`${i}`, `${aimItem}`);
-    return aimItem;
-  }
-  //LOCAL STORAGE
-  localStorage.setItem(i, adder());
-  let itemOfAim = localStorage.getItem(i);
-
-  let html = `<div class="aimItem">${i}. ${itemOfAim}</div>`;
-  pElement.insertAdjacentHTML("beforeend", html);
+  toDoListArray[i] = aimItem.value;
+  localStorage.setItem("toDoListArray", JSON.stringify(toDoListArray));
+  i = i + 1;
 });
-//CLEAR LOCAL STORAGE
-clearBtn.addEventListener("click", function () {
+
+//display items in the list
+displayListButton.addEventListener("click", function () {
+  listItems.forEach(myFunction);
+  function myFunction(index, item) {
+    displayItems.innerHTML += `${item + 1}. ${index}.<br>`;
+  }
+});
+//remove items
+function remove() {
+  // const greetings = JSON.parse(localStorage.getItem("greetings"));
+  const filtered = listItems.filter((item) => item !== "Hello");
+  localStorage.setItem("greetings", JSON.stringify(filtered));
+}
+//remove all items
+clearAllButton.addEventListener("click", function () {
   localStorage.clear();
 });
