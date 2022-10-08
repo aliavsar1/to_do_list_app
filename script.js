@@ -7,15 +7,28 @@ const displayListButton = document.getElementById("displayListBtn");
 const clearAllButton = document.getElementById("clearAllBtn");
 const displayGreeting = document.getElementById("displayGreeting");
 const displayMessage = document.getElementById("displayMessage");
-let displayItems = document.getElementById("displayItems");
+const displayItems = document.getElementById("displayItems");
 const aimItem = document.getElementById("aim");
 let i = 0;
 let toDoListArr = [];
 let listItems = JSON.parse(localStorage.getItem("toDoListArr"));
 
-// display the items
+// display the items in the array
+if (listItems == null || listItems.length == 0) {
+  alert("Yapılacak görev yok. Yeni görev girin.");
+} else {
+  listItems.forEach(myFunction);
+  function myFunction(index, item) {
+    const html = `${
+      item + 1
+    }. ${index}.<button id="${item}" onclick="removerBtn()">Görev yapıldı</button><br>`;
+    document
+      .querySelector("#displayItems")
+      .insertAdjacentHTML("beforeend", html);
+  }
+}
 
-//add items to the array
+//add items to the array and display them
 addButton.addEventListener("click", function () {
   if (listItems === null) {
     toDoListArr[i] = aimItem.value;
@@ -52,3 +65,30 @@ addButton.addEventListener("click", function () {
 
   i = i + 1;
 });
+
+const removerBtn = function () {
+  const buttons = document.getElementsByTagName("button");
+  const result = document.getElementById("result");
+  const buttonPressed = (event) => {
+    toDoListArr = JSON.parse(localStorage.getItem("toDoListArr"));
+
+    toDoListArr.splice(`${event.target.id}`, 1);
+    localStorage.setItem("toDoListArr", JSON.stringify(toDoListArr));
+    ////////////////////
+    displayItems.innerHTML = "";
+    listItems = JSON.parse(localStorage.getItem("toDoListArr"));
+    listItems.forEach(myFunction);
+    function myFunction(index, item) {
+      const html = `${
+        item + 1
+      }. ${index}.<button id="${item}" onclick="removerBtn()">Görev yapıldı</button><br>`;
+      document
+        .querySelector("#displayItems")
+        .insertAdjacentHTML("beforeend", html);
+    }
+  };
+
+  for (let button of buttons) {
+    button.addEventListener("click", buttonPressed);
+  }
+};
