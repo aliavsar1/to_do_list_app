@@ -2,7 +2,7 @@
 
 // Variable assignments
 const addButton = document.getElementById("addBtn");
-const removeButton = document.getElementById("removeBtn");
+
 const displayListButton = document.getElementById("displayListBtn");
 const clearAllButton = document.getElementById("clearAllBtn");
 const displayGreeting = document.getElementById("displayGreeting");
