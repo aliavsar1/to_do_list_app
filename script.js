@@ -8,68 +8,79 @@ const clearAllButton = document.getElementById("clearAllBtn");
 const displayGreeting = document.getElementById("displayGreeting");
 const displayMessage = document.getElementById("displayMessage");
 const displayItems = document.getElementById("displayItems");
+
 const aimItem = document.getElementById("aim");
+let listItems = JSON.parse(localStorage.getItem("toDoListArr"));
 let i = 0;
 let toDoListArr = [];
-let listItems = JSON.parse(localStorage.getItem("toDoListArr"));
 
-// display the items in the array
-if (listItems == null || listItems.length == 0) {
-  alert("Yapılacak görev yok. Yeni görev girin.");
-} else {
-  listItems.forEach(myFunction);
-  function myFunction(index, item) {
-    const html = `${
-      item + 1
-    }. ${index}.<button id="${item}" onclick="removerBtn()">Görev yapıldı</button><br>`;
-    document
-      .querySelector("#displayItems")
-      .insertAdjacentHTML("beforeend", html);
-  }
-}
+//FUNCTIONS
 
-//add items to the array and display them
-addButton.addEventListener("click", function () {
-  if (listItems === null) {
-    toDoListArr[i] = aimItem.value;
-    localStorage.setItem("toDoListArr", JSON.stringify(toDoListArr));
+// 1 - display function
+const display = function () {
+  if (listItems == null || listItems.length == 0) {
+    displayMessage.innerHTML = "Array yok. Yeni görev girin!";
+  } else {
     listItems = JSON.parse(localStorage.getItem("toDoListArr"));
     listItems.forEach(myFunction);
-    function myFunction(listItems, index, item) {
+    function myFunction(item, index) {
       const html = `${
         index + 1
-      }. ${item}.<button id="${item}" onclick="removerBtn()">Görev yapıldı</button><br>`;
+      }. ${item}.<button id="${index}" onclick="removeItem()">Görev yapıldı</button><br>`;
       document
         .querySelector("#displayItems")
         .insertAdjacentHTML("beforeend", html);
     }
-  } else {
+  }
+};
+display();
+
+//2. - create New Array
+const createNewArr = function () {
+  if (listItems == null || listItems.length == 0) {
+    toDoListArr[i] = aimItem.value;
+    localStorage.setItem("toDoListArr", JSON.stringify(toDoListArr));
+    listItems = JSON.parse(localStorage.getItem("toDoListArr"));
+    listItems.forEach(myFunction);
+    function myFunction(item, index) {
+      const html = `${
+        index + 1
+      }. ${item}.<button id="${index}" onclick="removeItem()">Görev yapıldı</button><br>`;
+      document
+        .querySelector("#displayItems")
+        .insertAdjacentHTML("beforeend", html);
+    }
+  }
+};
+
+// Add an item to the existing Array
+const addToTheExistingArr = function () {
+  if (listItems != null || listItems.length != 0) {
     i = listItems.length + 1;
     toDoListArr = listItems;
     toDoListArr.push(aimItem.value);
-    toDoListArr = toDoListArr;
+
     localStorage.setItem("toDoListArr", JSON.stringify(toDoListArr));
 
     displayItems.innerHTML = "";
 
     listItems.forEach(myFunction);
-    function myFunction(index, item) {
+    function myFunction(item, index) {
       const html = `${
-        item + 1
-      }. ${index}.<button id="${item}" onclick="removerBtn()">Görev yapıldı</button><br>`;
+        index + 1
+      }. ${item}.<button id="${index}" onclick="removeItem()">Görev yapıldı</button><br>`;
       document
         .querySelector("#displayItems")
         .insertAdjacentHTML("beforeend", html);
     }
   }
+};
 
-  i = i + 1;
-});
-
-const removerBtn = function () {
+// Remove an item from the Array
+const removeItem = function () {
   const buttons = document.getElementsByTagName("button");
   const result = document.getElementById("result");
-  const buttonPressed = (event) => {
+  const buttonPressed = function (event) {
     toDoListArr = JSON.parse(localStorage.getItem("toDoListArr"));
 
     toDoListArr.splice(`${event.target.id}`, 1);
@@ -78,13 +89,15 @@ const removerBtn = function () {
     displayItems.innerHTML = "";
     listItems = JSON.parse(localStorage.getItem("toDoListArr"));
     listItems.forEach(myFunction);
-    function myFunction(index, item) {
+    function myFunction(item, index) {
       const html = `${
-        item + 1
-      }. ${index}.<button id="${item}" onclick="removerBtn()">Görev yapıldı</button><br>`;
-      document
-        .querySelector("#displayItems")
-        .insertAdjacentHTML("beforeend", html);
+        index + 1
+      }. ${item}.<button id="${index}" onclick="removeItem()">Görev yapıldı</button><br>`;
+      displayItems.insertAdjacentHTML("beforeend", html);
+    }
+    if (listItems.length == 0) {
+      displayMessage.innerHTML = "Array yok. Yeni görev girin!";
+      display();
     }
   };
 
@@ -92,3 +105,14 @@ const removerBtn = function () {
     button.addEventListener("click", buttonPressed);
   }
 };
+
+//add to the array button
+//
+addButton.addEventListener("click", function () {
+  if (listItems == null || listItems.length == 0) {
+    displayMessage.innerHTML = "";
+    createNewArr();
+  } else {
+    addToTheExistingArr();
+  }
+});
