@@ -8,10 +8,14 @@ const clearAllButton = document.getElementById("clearAllBtn");
 const displayGreeting = document.getElementById("displayGreeting");
 const displayMessage = document.getElementById("displayMessage");
 const displayItems = document.getElementById("displayItems");
+const result1 = document.getElementById("result1");
+const result2 = document.getElementById("result2");
+const result3 = document.getElementById("result3");
 
 const aimItem = document.getElementById("aim");
 let listItems = JSON.parse(localStorage.getItem("toDoListArr"));
 let i = 0;
+
 let toDoListArr = [];
 
 //FUNCTIONS
@@ -19,7 +23,7 @@ let toDoListArr = [];
 // 1 - display function
 const display = function () {
   if (listItems == null || listItems.length == 0) {
-    displayMessage.innerHTML = "Array yok. Yeni görev girin!";
+    displayMessage.innerHTML = "Göreviniz yok. Yeni görev girin! -******";
   } else {
     listItems = JSON.parse(localStorage.getItem("toDoListArr"));
     listItems.forEach(myFunction);
@@ -45,12 +49,13 @@ const createNewArr = function () {
     function myFunction(item, index) {
       const html = `${
         index + 1
-      }. ${item}.<button id="${index}" onclick="removeItem()">Görev yapıldı</button><br>`;
+      }. ${item}.<button id="${11}" onclick="*">Düzenle</button><button id="${index}" onclick="removeItem()">Görev yapıldı</button><br>`;
       document
         .querySelector("#displayItems")
         .insertAdjacentHTML("beforeend", html);
     }
   }
+  input.value = " ";
 };
 
 // Add an item to the existing Array
@@ -68,7 +73,7 @@ const addToTheExistingArr = function () {
     function myFunction(item, index) {
       const html = `${
         index + 1
-      }. ${item}.<button id="${index}" onclick="removeItem()">Görev yapıldı</button><br>`;
+      }. ${item}.<button id="${22}" onclick="*">Düzenle</button><button id="${index}" onclick="removeItem()">Görev yapıldı</button><br>`;
       document
         .querySelector("#displayItems")
         .insertAdjacentHTML("beforeend", html);
@@ -79,12 +84,13 @@ const addToTheExistingArr = function () {
 // Remove an item from the Array
 const removeItem = function () {
   const buttons = document.getElementsByTagName("button");
-  const result = document.getElementById("result");
+
   const buttonPressed = function (event) {
     toDoListArr = JSON.parse(localStorage.getItem("toDoListArr"));
 
     toDoListArr.splice(`${event.target.id}`, 1);
     localStorage.setItem("toDoListArr", JSON.stringify(toDoListArr));
+
     ////////////////////
     displayItems.innerHTML = "";
     listItems = JSON.parse(localStorage.getItem("toDoListArr"));
@@ -92,11 +98,10 @@ const removeItem = function () {
     function myFunction(item, index) {
       const html = `${
         index + 1
-      }. ${item}.<button id="${index}" onclick="removeItem()">Görev yapıldı</button><br>`;
+      }. ${item}.<button id="${33}" onclick="*">Düzenle</button><button id="${index}" onclick="removeItem()">Görev yapıldı</button><br>`;
       displayItems.insertAdjacentHTML("beforeend", html);
     }
     if (listItems.length == 0) {
-      displayMessage.innerHTML = "Array yok. Yeni görev girin!";
       display();
     }
   };
