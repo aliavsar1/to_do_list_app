@@ -30,7 +30,7 @@ const display = function () {
     function myFunction(item, index) {
       const html = `${
         index + 1
-      }. ${item}.<button id="${index}" onclick="removeItem()">Görev yapıldı</button><br>`;
+      }. ${item}.<button id="${11}" onclick="*">Düzenle</button><button id="${index}" onclick="removeItem()">Görev yapıldı</button><br>`;
       document
         .querySelector("#displayItems")
         .insertAdjacentHTML("beforeend", html);
