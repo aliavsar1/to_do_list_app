@@ -1,17 +1,5 @@
-.aimItem {
-  border: 1px gray solid;
-  width: 600px;
-  margin: 5px 0px;
-  /* display: inline-block; */
-}
-.removeItem {
-  border: 1px solid black;
-  width: 100px;
-  margin: 5px 0px;
-}
-/* #displayItems {
+body {
+  margin: 20px 300px;
+  text-align: center;
   display: inline-block;
-  border: 1px solid black;
-  width: 200px;
-  height: 25px;
-} */
+}

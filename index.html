@@ -7,17 +7,13 @@
     <title>Document</title>
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body>
-    <label for="html">Görev ekle :</label>
-    <input type="text" id="aim" placeholder="Yapılacak görev girin" />
-    <button type="button" id="addBtn">Ekle</button>
+  <body onload="myFunction()">
+    <input type="text" class="aim" size="100" placeholder="Görev girin" />
+    <button class="addBtn">Görev ekle</button>
+    <br />
+    <p class="displayGreeting"></p>
+    <p class="displayItems"></p>
 
-    <p id="displayGreeting"></p>
-    <p id="displayMessage"></p>
-    <p id="displayItems"></p>
-    <p id="result1"></p>
-    <p id="result2"></p>
-    <p id="result3"></p>
     <script src="script.js"></script>
   </body>
 </html>
