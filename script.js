@@ -40,14 +40,12 @@ const displayTaskItems = function () {
 
 addButton.addEventListener("click", function () {
   if (toDoListArr.length == 0) {
-    console.log("array boşsa");
     toDoListArr.push(aimItem.value);
     localStorage.setItem("toDoListArr", JSON.stringify(toDoListArr));
 
     displayMessage2();
     displayTaskItems();
   } else {
-    console.log("array doluysa");
     i = toDoListArr.length + 1;
 
     toDoListArr.push(aimItem.value);
