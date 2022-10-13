@@ -44,7 +44,6 @@ addButton.addEventListener("click", function () {
     toDoListArr.push(aimItem.value);
     localStorage.setItem("toDoListArr", JSON.stringify(toDoListArr));
 
-    displayGreeting.innerHTML = "";
     displayMessage2();
     displayTaskItems();
   } else {
