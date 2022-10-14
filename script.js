@@ -20,10 +20,12 @@ const myFunction = function () {
 };
 
 const displayMessage1 = function () {
+  document.querySelector(".aim").value = "";
   displayGreeting.innerHTML = `Hoş geldiniz. Bugün yapılacak bir işiniz yok. Yeni görev girin!`;
 };
 
 const displayMessage2 = function () {
+  document.querySelector(".aim").value = "";
   displayGreeting.innerHTML = `Hoş geldiniz. Bugün yapılacak ${toDoListArr.length} adet işiniz var.`;
   displayTaskItems();
 };
@@ -32,14 +34,15 @@ const displayTaskItems = function () {
   displayItems.innerHTML = "";
   toDoListArr = JSON.parse(localStorage.getItem("toDoListArr"));
   for (let i = 0; i < toDoListArr.length; i++) {
-    let html = `<p class="${i} taskItem">${i + 1}. ${
+    let html = `<p class="${i} taskItem" ondblclick="editItem()">${i + 1}. ${
       toDoListArr[i]
-    }</p><button class="editTask">Düzenle</button><button class="taskDone" id="${i}" onClick="reply_click(this.id)">Görevi sil</button>`;
+    }</p><button class="editTask">Düzenle</button><button class="taskDone" id="${i}" onClick="removeItem(this.id)">Görevi sil</button>`;
     displayItems.insertAdjacentHTML("beforeend", html);
   }
 };
 
-addButton.addEventListener("click", function () {
+addButton.addEventListener("click", addNewItem);
+function addNewItem() {
   if (toDoListArr.length == 0) {
     toDoListArr.push(aimItem.value);
     localStorage.setItem("toDoListArr", JSON.stringify(toDoListArr));
@@ -56,12 +59,12 @@ addButton.addEventListener("click", function () {
     displayTaskItems();
     i = i + 1;
   }
-});
+}
 
-function reply_click(clicked_id) {
-  const x = clicked_id;
-  console.log(x);
-  toDoListArr.splice(x, 1);
+function removeItem(clicked_id) {
+  const clickedId = clicked_id;
+  console.log(clickedId);
+  toDoListArr.splice(clickedId, 1);
   localStorage.setItem("toDoListArr", JSON.stringify(toDoListArr));
   displayItems.innerHTML = "";
   if (toDoListArr.length == 0) {
@@ -71,3 +74,26 @@ function reply_click(clicked_id) {
   }
   displayTaskItems();
 }
+
+// function editItem(event) {
+//   let item = event.target.innerHTML;
+//   let itemInput = document.createElement("input");
+//   itemInput.type = "text";
+//   itemInput.value = item;
+//   itemInput.classList.add("edit");
+//   itemInput.addEventListener("keypress", saveItem);
+//   itemInput.addEventListener("click", saveItem);
+//   event.target.parentNode.prepend(itemInput);
+//   event.target.remove();
+//   itemInput.select();
+// }
+
+// function saveItem(event) {
+//   let inputValue = event.target.value;
+//   if(event.target.value.length>0 && (event.keyCode === 13|| event.type === 'click'))
+//   let p = document.createElement('p');
+//   p.addEventListener('dblclick', editItem)
+//   p.textContent=event.target.value;
+//   event.target.parentNode.prepend(p);
+//   event.target.remove()
+// }
