@@ -62,6 +62,7 @@ function reply_click(clicked_id) {
 
 addButton.addEventListener("click", function () {
   if (Object.keys(toDoListObj).length === 0) {
+    i = 0;
     toDoListObj[i] = aimItem.value;
     localStorage.setItem("toDoListObj", JSON.stringify(toDoListObj));
 
