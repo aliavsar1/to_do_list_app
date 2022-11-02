@@ -69,8 +69,11 @@ addButton.addEventListener("click", function () {
     displayMessage2();
     displayTaskItems();
   } else {
-    i = Object.keys(toDoListObj).length;
+    const lengthObj = Object.keys(toDoListObj).length;
 
+    const keyNum = +Object.keys(toDoListObj)[lengthObj - 1];
+
+    i = keyNum + 1;
     toDoListObj[i] = aimItem.value;
     localStorage.setItem("toDoListObj", JSON.stringify(toDoListObj));
 
