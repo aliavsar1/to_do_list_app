@@ -1,6 +1,32 @@
-body {
-  margin: 20px 300px;
+.instruction {
+  color: rgb(104, 128, 9);
+}
+.container {
+  width: 1295px;
+  height: 610px;
+  border-right: 5px solid orangered;
+  border-left: 5px solid orangered;
+  border-top: 5px solid orangered;
   text-align: center;
-  display: inline-block;
-  background-color: rgb(186, 224, 211);
+}
+.leftDiv {
+  width: 420px;
+  border-right: 2px solid orangered;
+  border-left: 2px solid orangered;
+  border-top: 2px solid orangered;
+  height: 598px;
+  float: left;
+  margin: 5px 0px 0px 5px;
+  float: left;
+}
+
+.rightDiv {
+  width: 835px;
+  border-right: 1px solid orangered;
+  border-left: 1px solid orangered;
+  border-top: 1px solid orangered;
+  height: 598px;
+  float: left;
+  margin: 5px 0px 0px 5px;
+  position: relative;
 }
