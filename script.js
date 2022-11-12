@@ -3,8 +3,6 @@ const addButton = document.querySelector(".addBtn");
 const displayGreeting = document.querySelector(".displayGreeting");
 const displayItems = document.querySelector("#displayItems");
 const ps = document.getElementsByTagName("p");
-const displayItemsinPs = document.getElementById("displayItems");
-const result = document.getElementById("result");
 
 let toDoListObj = JSON.parse(localStorage.getItem("toDoListObj")) || {};
 let i = 0;
@@ -43,6 +41,9 @@ const displayTaskItems = function () {
   }
 };
 
+const displayItemsinPs = document.getElementById("displayItems");
+const result = document.getElementById("result");
+
 const pGroupPressed = (e) => {
   const isP = e.target.nodeName === "P";
 
@@ -50,7 +51,12 @@ const pGroupPressed = (e) => {
     return;
   }
 
+  console.log(e.target.innerHTML);
+  console.log(e.target.id);
   let targetId = e.target.id;
+  console.log(targetId + " bu targetId");
+  console.log(typeof targetId);
+
   let item = e.target.innerHTML; //hedefteki ögenin içindeki bilgi seçilir
   const item2 = item.substr(3);
   inputVal.value = item2;
@@ -75,7 +81,7 @@ const reply_click = function (clicked_id) {
 //addeventlisteners
 
 inputVal.addEventListener("keypress", function (event) {
-  if (event.key === "Enter") {
+  if (event.key === "Enter" && inputVal.value != 0) {
     if (Object.keys(toDoListObj).length === 0) {
       i = 0;
       toDoListObj[i] = inputVal.value;
