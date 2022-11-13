@@ -2,9 +2,7 @@ const inputVal = document.querySelector(".inputValue");
 const addButton = document.querySelector(".addBtn");
 const displayGreeting = document.querySelector(".displayGreeting");
 const displayItems = document.querySelector("#displayItems");
-const ps = document.getElementsByTagName("p");
 const displayItemsinPs = document.getElementById("displayItems");
-
 let toDoListObj = JSON.parse(localStorage.getItem("toDoListObj")) || {};
 let i = 0;
 
