@@ -1,6 +1,7 @@
 body {
   background-color: rgb(186, 224, 211);
   font-family: sans-serif;
+  font-size: 14px;
 }
 .instruction {
   color: rgb(104, 128, 9);
