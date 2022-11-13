@@ -19,7 +19,7 @@ const myFunction = () => {
 };
 
 const displayMessage1 = () => {
-  displayGreeting.innerHTML = `Hoş geldiniz. Bugün yapılacak bir işiniz yok. Yeni görev girin!`;
+  displayGreeting.innerHTML = `Hoş geldiniz. Bugün ${dateFunction()}. Yapılacak bir işiniz yok. Yeni görev girin!`;
 };
 
 const displayMessage2 = () => {
