@@ -3,12 +3,13 @@ const addButton = document.querySelector(".addBtn");
 const displayGreeting = document.querySelector(".displayGreeting");
 const displayItems = document.querySelector("#displayItems");
 const ps = document.getElementsByTagName("p");
+const displayItemsinPs = document.getElementById("displayItems");
 
 let toDoListObj = JSON.parse(localStorage.getItem("toDoListObj")) || {};
 let i = 0;
 
 //functions
-const myFunction = function () {
+const myFunction = () => {
   if (toDoListObj && Object.keys(toDoListObj).length != 0) {
     displayMessage2();
   } else {
@@ -17,18 +18,18 @@ const myFunction = function () {
   }
 };
 
-const displayMessage1 = function () {
+const displayMessage1 = () => {
   displayGreeting.innerHTML = `Hoş geldiniz. Bugün yapılacak bir işiniz yok. Yeni görev girin!`;
 };
 
-const displayMessage2 = function () {
+const displayMessage2 = () => {
   displayGreeting.innerHTML = `Hoş geldiniz. Bugün yapılacak ${
     Object.keys(toDoListObj).length
   } adet işiniz var.`;
   displayTaskItems();
 };
 
-const displayTaskItems = function () {
+const displayTaskItems = () => {
   displayItems.innerHTML = "";
   toDoListObj = JSON.parse(localStorage.getItem("toDoListObj"));
   for (let i = 0; i < Object.keys(toDoListObj).length; i++) {
@@ -41,33 +42,21 @@ const displayTaskItems = function () {
   }
 };
 
-const displayItemsinPs = document.getElementById("displayItems");
-const result = document.getElementById("result");
-
 const pGroupPressed = (e) => {
   const isP = e.target.nodeName === "P";
-
   if (!isP) {
     return;
   }
-
-  console.log(e.target.innerHTML);
-  console.log(e.target.id);
   let targetId = e.target.id;
-  console.log(targetId + " bu targetId");
-  console.log(typeof targetId);
-
   let item = e.target.innerHTML; //hedefteki ögenin içindeki bilgi seçilir
   const item2 = item.substr(3);
   inputVal.value = item2;
   delete toDoListObj[targetId];
 };
-displayItemsinPs.addEventListener("dblclick", pGroupPressed);
 
-const reply_click = function (clicked_id) {
+const reply_click = (clicked_id) => {
   const x = clicked_id;
   delete toDoListObj[x];
-  // toDoListObj = toDoListObj;
   localStorage.setItem("toDoListObj", JSON.stringify(toDoListObj));
   displayItems.innerHTML = "";
   if (Object.keys(toDoListObj).length == 0) {
@@ -79,6 +68,7 @@ const reply_click = function (clicked_id) {
 };
 
 //addeventlisteners
+displayItemsinPs.addEventListener("dblclick", pGroupPressed);
 
 inputVal.addEventListener("keypress", function (event) {
   if (event.key === "Enter" && inputVal.value != 0) {
