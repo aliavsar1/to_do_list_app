@@ -19,13 +19,13 @@ const myFunction = () => {
 };
 
 const displayMessage1 = () => {
-  displayGreeting.innerHTML = `Hoş geldiniz. Bugün ${dateFunction()}. Yapılacak bir işiniz yok. Yeni görev girin!`;
+  displayGreeting.innerHTML = `Hoş geldiniz. <br>Bugün ${dateFunction()}. <br>Yapılacak bir işiniz yok. Yeni görev girin!`;
 };
 
 const displayMessage2 = () => {
   displayGreeting.innerHTML = `Hoş geldiniz. Bugün ${dateFunction()}. Yapılacak ${
     Object.keys(toDoListObj).length
-  } adet işiniz var.`;
+  } adet işiniz var.<br>Düzeltmek için görevin üzerine ÇİFT TIKLAyın.`;
   displayTaskItems();
 };
 
