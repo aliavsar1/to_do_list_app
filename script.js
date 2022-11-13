@@ -23,7 +23,7 @@ const displayMessage1 = () => {
 };
 
 const displayMessage2 = () => {
-  displayGreeting.innerHTML = `Hoş geldiniz. Bugün yapılacak ${
+  displayGreeting.innerHTML = `Hoş geldiniz. Bugün ${dateFunction()}. Yapılacak ${
     Object.keys(toDoListObj).length
   } adet işiniz var.`;
   displayTaskItems();
@@ -66,6 +66,23 @@ const reply_click = (clicked_id) => {
   }
   displayTaskItems();
 };
+function dateFunction(newDate) {
+  const dateObj = new Date();
+  const day = dateObj.getUTCDate();
+  const month = dateObj.getUTCMonth() + 1; //months from 1-12
+  const weekday = [
+    "Pazar",
+    "Pazartesi",
+    "Salı",
+    "Çarşamba",
+    "Perşembe",
+    "Cuma",
+    "Cumartesi",
+  ][dateObj.getDay()];
+
+  const year = dateObj.getUTCFullYear();
+  return (newDate = `${day + "." + month + "." + year + "," + " " + weekday}`);
+}
 
 //addeventlisteners
 displayItemsinPs.addEventListener("dblclick", pGroupPressed);
